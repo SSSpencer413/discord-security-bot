@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const antiSpamSet = {};
 
 client.on('ready', () => {
   console.log("Logged into Discord");
@@ -15,14 +14,11 @@ client.on('ready', () => {
 
 client.on('message', msg =>{
   var prefix = process.env.prefix;
-  
+
   if (msg.mentions.users.get(526591006926307338)) {
     msg.react("👋");
   }
-  
-  //Record the user's most recent message timestamp
-  antiSpamSet[msg.author.id] = msg.createdTimestamp;
-  
+
   let toModerate = moderateMessage(client, msg);
   if (toModerate) {
     if(msg.content.indexOf(prefix) !== 0) return;
@@ -59,11 +55,15 @@ function moderateMessage(client, message) {
         spamCache++;
       }
     }
-    
-    //Check if user is on the list and see the difference between the two timestamps is greater than 700ms
-    if (antiSpamSet.hasOwnProperty(message.author.id) && (message.createdTimestamp - antiSpamSet[message.author.id] <= 700)) {
-      spamCache++;
+
+    //Check the individual user's messages to see if they seem to be posted in a really short amount of time.
+    let userMessages = messageArray.filter(messageX => messageX.author.id == message.author.id);
+    for (var i=1; i < 3; i++) {
+      if ((userMessages[i-1].createdTimestamp-userMessages[i].createdTimestamp) < 700) {
+        spamCache++;
+      }
     }
+
 
     if (spamCache > 1) {
       message.delete();
