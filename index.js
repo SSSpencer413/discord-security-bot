@@ -61,7 +61,7 @@ function moderateMessage(client, message) {
     }
     
     //Check if user is on the list and see the difference between the two timestamps is greater than 700ms
-    if (antiSpamSet.hasOwnProperty(msg.author.id) && (message.createdTimestamp - antiSpamSet[msg.author.id] <= 700)) {
+    if (antiSpamSet.hasOwnProperty(message.author.id) && (message.createdTimestamp - antiSpamSet[message.author.id] <= 700)) {
       spamCache++;
     }
 
