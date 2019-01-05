@@ -18,7 +18,7 @@ client.on('message', msg =>{
   if (msg.mentions.users.get(526591006926307338)) {
     msg.react("👋");
   }
-
+  
   let toModerate = moderateMessage(client, msg);
   if (toModerate) {
     if(msg.content.indexOf(prefix) !== 0) return;
@@ -66,6 +66,7 @@ function moderateMessage(client, message) {
 
 
     if (spamCache > 1) {
+      console.log(`Deleted message by ${message.author.name}: \n ${message.content}`);
       message.delete();
       return false;
     }
