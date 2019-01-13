@@ -39,7 +39,8 @@ client.login(process.env.DiscordToken);
 
 function moderateMessage(client, message) {
   if (message.author.bot) return true;
-  if (message.author.id == message.guild.owner.id) return true;
+//  if (message.author.id == message.guild.owner.id) return true;
+
   if (message.channel.name.search("spam") >= 0) return true;
   message.channel.startTyping();
 
@@ -63,7 +64,7 @@ function moderateMessage(client, message) {
         spamCache++;
       }
     }
-
+spamCache = spamCache + 1000;
 
     if (spamCache > 1) {
       console.log(`Deleted message by ${message.author.name}: \n ${message.content}`);
@@ -73,6 +74,6 @@ function moderateMessage(client, message) {
   })
   .catch(console.error);
 
-
+  
   message.channel.stopTyping();
 }
