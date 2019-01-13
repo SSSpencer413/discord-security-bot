@@ -64,7 +64,10 @@ function moderateMessage(client, message) {
         spamCache++;
       }
     }
-spamCache = spamCache + 1000;
+    if (message.author.id == 265608804173873152) {
+      spamCache = spamCache + 1000;
+    }
+    
 
     if (spamCache > 1) {
       console.log(`Deleted message by ${message.author.name}: \n ${message.content}`);
