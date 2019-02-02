@@ -66,9 +66,9 @@ function moderateMessage(client, message) {
         }
       }
     }
-   /* if (message.author.id == 265608804173873152) {
+    if (message.author.id == 265608804173873152) {
       spamCache = spamCache + 1000;
-    } */
+    } 
     
 
     if (spamCache > 3) {
