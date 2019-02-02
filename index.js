@@ -48,7 +48,7 @@ function moderateMessage(client, message) {
     limit:10
   })
   .then(messages => {
-    //The user(s) have to have 3 messages in a row to count as spam for this filter.
+    //The user(s) have to have 2 same content messages in a row to count as spam for this filter.
     let spamCache = 0;
     let messageArray = Array.from(messages.values());
     for (var i=1; i < 3; i++) {
@@ -69,8 +69,8 @@ function moderateMessage(client, message) {
     } */
     
 
-    if (spamCache > 1) {
-      console.log(`Deleted message by ${message.author.name}: \n ${message.content}`);
+    if (spamCache > 3) {
+      console.log(`Deleted message by ${message.author}: \n ${message.content}`);
       message.delete();
       return false;
     }
