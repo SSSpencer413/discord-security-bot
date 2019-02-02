@@ -60,8 +60,10 @@ function moderateMessage(client, message) {
     //Check the individual user's messages to see if they seem to be posted in a really short amount of time.
     let userMessages = messageArray.filter(messageX => messageX.author.id == message.author.id);
     for (var i=1; i < 3; i++) {
-      if ((userMessages[i-1].createdTimestamp-userMessages[i].createdTimestamp) < 700) {
-        spamCache++;
+      if (userMessages[i-1]) {
+        if ((userMessages[i-1].createdTimestamp-userMessages[i].createdTimestamp) < 700) {
+          spamCache++;
+        }
       }
     }
    /* if (message.author.id == 265608804173873152) {
