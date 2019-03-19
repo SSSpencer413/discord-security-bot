@@ -12,7 +12,8 @@ exports.run = (client, msg, args) => {
       }
       
     msg.channel.send(message);
-    msg.delete();
+    
+    msg.delete(50);
     console.log(`${msg.author} said ${message} with the bot.`);
   }
 }
