@@ -40,8 +40,10 @@ client.login(process.env.DiscordToken);
 function moderateMessage(client, message) {
   if (message.author.bot) return true;
   if (message.author.id == message.guild.owner.id) return true;
-
+  if (message.author.id == "180803410306662401") return true;
   if (message.channel.name.search("spam") >= 0) return true;
+  
+  
   message.channel.startTyping();
 
   message.channel.fetchMessages({
